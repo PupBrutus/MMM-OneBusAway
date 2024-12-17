@@ -6,7 +6,8 @@ Module.register("MMM-OneBusAway", {
     defaults: {
         stopId: "1_2672",
         maxResults: 5,
-        fadeSpeed: 1000 * 60, // update every minute
+        fadeSpeed: 1000 * 30, // update every 30 seconds
+        apiCallInterval: 1000 * 60 * 5, // API call every 5 minutes
         buses: []
     },
 
@@ -69,9 +70,12 @@ Module.register("MMM-OneBusAway", {
         this.getBusesInfo();
         var self = this;
         setInterval(function () {
-            self.getBusesInfo(); 
+            self.updateDom(); // Update DOM every fadeSpeed interval
         }, self.config.fadeSpeed);
 
+        setInterval(function () {
+            self.getBusesInfo(); // Call API every apiCallInterval
+        }, self.config.apiCallInterval);
     },
 
     getBusesInfo: function () {
