@@ -87,6 +87,9 @@ Module.register("MMM-OneBusAway", {
             this.hasLoaded = true;
             this.result = payload;
             this.updateDom();
+        } else if (notification === "BUSES_INFO_ERROR") {
+            console.log("Error received from node_helper: " + payload);
+            this.updateDom();
         }
     },
 });

@@ -19,6 +19,7 @@ module.exports = NodeHelper.create({
       }
       else {
         console.log("ERROR while getting the url" + error);
+        self.sendSocketNotification('BUSES_INFO_ERROR', error);
       }
     });
   },
